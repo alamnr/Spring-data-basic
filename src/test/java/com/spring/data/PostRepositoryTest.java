@@ -28,6 +28,10 @@ public class PostRepositoryTest {
 		post.setPostDate(getPostDate());
 		post.setTitle("First Post");
 
+		post.getCommentsBy().add("Jahalam");
+		post.getCommentsBy().add("Sahalam");
+		post.getCommentsBy().add("Jharna");
+
 		repository.save(post);
 
 		Post dbpost = repository.findOne(post.getPostId());
@@ -37,11 +41,18 @@ public class PostRepositoryTest {
 
 	private static Date getPostDate() {
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.YEAR, 2019);
+
+		calendar.set(Calendar.YEAR, 2018);
 		calendar.set(Calendar.MONTH, 8);
 		calendar.set(Calendar.DATE, 30);
 		calendar.set(Calendar.HOUR, 23);
 		calendar.set(Calendar.MINUTE, 30);
+
+		/*calendar.set(Calendar.YEAR, 2019);
+		calendar.set(Calendar.MONTH, 8);
+		calendar.set(Calendar.DATE, 30);
+		calendar.set(Calendar.HOUR, 23);
+		calendar.set(Calendar.MINUTE, 30);*/
 		return calendar.getTime();
 		//return new Date();
 	}
