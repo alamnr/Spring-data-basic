@@ -1,7 +1,9 @@
 package com.spring.data.entities;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 import javax.persistence.CollectionTable;
@@ -13,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Formula;
@@ -52,6 +55,12 @@ public class Post {
 	@Column(name="NAME")
 	private Set<String> commentsBy =  new HashSet<String>();
 
+
+	@ElementCollection(fetch=FetchType.EAGER)
+	@CollectionTable(name="POST_LIKE", joinColumns=@JoinColumn(name="POST_ID"))
+	@MapKeyColumn(name="SITION_TYPE")
+	@Column(name="NAME")
+	private Map<String,String> likeBy =  new HashMap<String,String>();
 
 	public int getAgeDay() {
 		return ageDay;
@@ -121,12 +130,24 @@ public class Post {
 		this.commentsBy = commentsBy;
 	}
 
+
+
+
+	public Map<String, String> getLikeBy() {
+		return likeBy;
+	}
+
+	public void setLikeBy(Map<String, String> likeBy) {
+		this.likeBy = likeBy;
+	}
+
 	@Override
 	public String toString() {
 		return "Post [postId=" + postId + ", title=" + title + ", postDate=" + postDate + ", ageDay=" + ageDay
 				+ ", ageHour=" + ageHour + ", ageMinute=" + ageMinute + ", amPm=" + amPm + ", commentsBy=" + commentsBy
-				+ "]";
+				+ ", likeBy=" + likeBy + "]";
 	}
+
 
 
 

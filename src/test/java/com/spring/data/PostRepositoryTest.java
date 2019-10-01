@@ -32,6 +32,11 @@ public class PostRepositoryTest {
 		post.getCommentsBy().add("Sahalam");
 		post.getCommentsBy().add("Jharna");
 
+
+		post.getLikeBy().put("Manager", "Kabir");
+		post.getLikeBy().put("Chairman", "Khan");
+		post.getLikeBy().put("Director", "Johir");
+
 		repository.save(post);
 
 		Post dbpost = repository.findOne(post.getPostId());
