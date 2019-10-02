@@ -2,6 +2,7 @@ package com.spring.data;
 
 import static org.junit.Assert.assertNotNull;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -11,11 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.spring.data.entities.Bond;
 import com.spring.data.entities.Post;
 import com.spring.data.entities.PostType;
+import com.spring.data.entities.Stock;
+import com.spring.data.repositories.BondRepository;
 import com.spring.data.repositories.CurrencyRepository;
 import com.spring.data.repositories.MarketRepository;
 import com.spring.data.repositories.PostRepository;
+import com.spring.data.repositories.StockRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 //@ContextConfiguration(locations="classpath:META-INF/application-context.xml")
@@ -30,6 +35,12 @@ public class PostRepositoryTest {
 
 	@Autowired
 	MarketRepository   marketRepository;
+
+	@Autowired
+	StockRepository stockRepository;
+
+	@Autowired
+	BondRepository bondRepository;
 
 	@Test
 	public void test() {
@@ -75,6 +86,23 @@ public class PostRepositoryTest {
 		}
 		 */
 
+		Stock stock = new Stock();
+
+		stock.setName("DES");
+		stock.setIssuer("GM Bashir");
+		stock.setPurchaseDate(new Date());
+		stock.setSharePrice(new BigDecimal(145));
+
+		stockRepository.save(stock);
+
+		Bond bond = new Bond();
+
+		bond.setName("CSE");
+		bond.setIssuer("GM Kabir");
+		bond.setPurchaseDate(new Date());
+		bond.setSharePrice(new BigDecimal(130));
+
+		bondRepository.save(bond);
 	}
 
 	private static Date getPostDate() {
