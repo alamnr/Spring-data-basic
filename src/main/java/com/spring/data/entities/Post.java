@@ -58,7 +58,7 @@ public class Post {
 
 	@ElementCollection(fetch=FetchType.EAGER)
 	@CollectionTable(name="POST_LIKE", joinColumns=@JoinColumn(name="POST_ID"))
-	@MapKeyColumn(name="SITION_TYPE")
+	@MapKeyColumn(name="POSITION_TYPE")
 	@Column(name="NAME")
 	private Map<String,String> likeBy =  new HashMap<String,String>();
 

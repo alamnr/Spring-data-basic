@@ -11,7 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.spring.data.entities.Currency;
 import com.spring.data.entities.Post;
+import com.spring.data.entities.id.CurrencyId;
+import com.spring.data.repositories.CurrencyRepository;
 import com.spring.data.repositories.PostRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -21,6 +24,9 @@ public class PostRepositoryTest {
 
 	@Autowired
 	PostRepository repository;
+
+	@Autowired
+	CurrencyRepository currencyRepository;
 
 	@Test
 	public void test() {
@@ -42,6 +48,16 @@ public class PostRepositoryTest {
 		Post dbpost = repository.findOne(post.getPostId());
 		assertNotNull(dbpost);
 		System.out.println(dbpost);
+
+		Currency currency =  new Currency();
+		currency.setCountryName("BDT");
+		currency.setCurrencyName("Taka");
+		currency.setSymbol("$");
+
+		currencyRepository.save(currency);
+
+		System.out.println(currencyRepository.findOne(new CurrencyId(currency.getCurrencyName(), currency.getCountryName())).getSymbol());
+
 	}
 
 	private static Date getPostDate() {
