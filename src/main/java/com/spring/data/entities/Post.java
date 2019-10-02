@@ -10,6 +10,8 @@ import javax.persistence.CollectionTable;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -35,7 +37,8 @@ public class Post {
 	@Column(name="POST_DATE")
 	Date postDate;
 
-
+	@Enumerated(EnumType.STRING)
+	private PostType postType;
 
 	@Formula("datediff('DAY',post_date,curdate())")
 	int ageDay;	
@@ -141,15 +144,22 @@ public class Post {
 		this.likeBy = likeBy;
 	}
 
-	@Override
-	public String toString() {
-		return "Post [postId=" + postId + ", title=" + title + ", postDate=" + postDate + ", ageDay=" + ageDay
-				+ ", ageHour=" + ageHour + ", ageMinute=" + ageMinute + ", amPm=" + amPm + ", commentsBy=" + commentsBy
-				+ ", likeBy=" + likeBy + "]";
+
+
+	public PostType getPostType() {
+		return postType;
 	}
 
+	public void setPostType(PostType postType) {
+		this.postType = postType;
+	}
 
-
+	@Override
+	public String toString() {
+		return "Post [postId=" + postId + ", title=" + title + ", postDate=" + postDate + ", postType=" + postType
+				+ ", ageDay=" + ageDay + ", ageHour=" + ageHour + ", ageMinute=" + ageMinute + ", amPm=" + amPm
+				+ ", commentsBy=" + commentsBy + ", likeBy=" + likeBy + "]";
+	}
 
 
 }

@@ -11,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.spring.data.entities.Currency;
-import com.spring.data.entities.Market;
 import com.spring.data.entities.Post;
+import com.spring.data.entities.PostType;
 import com.spring.data.repositories.CurrencyRepository;
 import com.spring.data.repositories.MarketRepository;
 import com.spring.data.repositories.PostRepository;
@@ -41,6 +40,7 @@ public class PostRepositoryTest {
 		post.getCommentsBy().add("Jahalam");
 		post.getCommentsBy().add("Sahalam");
 		post.getCommentsBy().add("Jharna");
+		post.setPostType(PostType.PUBLIC);
 
 
 		post.getLikeBy().put("Manager", "Kabir");
@@ -53,17 +53,17 @@ public class PostRepositoryTest {
 		assertNotNull(dbpost);
 		System.out.println(dbpost);
 
-		Currency currency =  new Currency();
+		/*Currency currency =  new Currency();
 		currency.setCountryName("BDT");
 		currency.setCurrencyName("Taka");
 		currency.setSymbol("$");
-
+		 */
 		/*currencyRepository.save(currency);
 
 		System.out.println(currencyRepository.findOne(new CurrencyId(currency.getCurrencyName(), currency.getCountryName())).getSymbol());
 		 */
 
-		Market market  = new Market();
+		/*		Market market  = new Market();
 
 		market.setMarketName("NAZDAC");
 		market.setCurrency(currency);
@@ -73,7 +73,7 @@ public class PostRepositoryTest {
 			System.out.println(iterator.getMarketName());
 			System.out.println(iterator.getCurrency().getCountryName());
 		}
-
+		 */
 
 	}
 
