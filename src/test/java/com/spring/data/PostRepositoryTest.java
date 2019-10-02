@@ -12,9 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.spring.data.entities.Currency;
+import com.spring.data.entities.Market;
 import com.spring.data.entities.Post;
-import com.spring.data.entities.id.CurrencyId;
 import com.spring.data.repositories.CurrencyRepository;
+import com.spring.data.repositories.MarketRepository;
 import com.spring.data.repositories.PostRepository;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -27,6 +28,9 @@ public class PostRepositoryTest {
 
 	@Autowired
 	CurrencyRepository currencyRepository;
+
+	@Autowired
+	MarketRepository   marketRepository;
 
 	@Test
 	public void test() {
@@ -54,9 +58,22 @@ public class PostRepositoryTest {
 		currency.setCurrencyName("Taka");
 		currency.setSymbol("$");
 
-		currencyRepository.save(currency);
+		/*currencyRepository.save(currency);
 
 		System.out.println(currencyRepository.findOne(new CurrencyId(currency.getCurrencyName(), currency.getCountryName())).getSymbol());
+		 */
+
+		Market market  = new Market();
+
+		market.setMarketName("NAZDAC");
+		market.setCurrency(currency);
+		marketRepository.save(market);
+
+		for (Market iterator : marketRepository.findAll()) {
+			System.out.println(iterator.getMarketName());
+			System.out.println(iterator.getCurrency().getCountryName());
+		}
+
 
 	}
 
